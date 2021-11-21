@@ -25,6 +25,8 @@ public class DefaultController extends AbstractController
     public static final String PLAYER2_SHIP_SUNK = "Player2ShipSunk";
     public static final String PLAYER2_SHOT_MISSED = "Player2ShotMissed";
     
+    public static final String PLAYER1_SQUARE_ALREADY_SHOT = "Player1SquareAlreadyShot";
+    public static final String PLAYER2_SQUARE_ALREADY_SHOT = "Player2SquareAlreadyShot";
     /* 
      * These methods are invoked by the Views in response to changes in the
      * Views (in response to user input) which must be reflected in the Model.
