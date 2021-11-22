@@ -136,22 +136,20 @@ public final class DefaultModel extends AbstractModel {
         int x = s.get("x");
         int y = s.get("y");
         
-
         /* Get Square; Mark as Hit */
         
         Square square = player1.getPrimary().get(x, y);
-        /**Already called square */
         
-        if(square.isHit()){
-
-            firePropertyChange(DefaultController.PLAYER1_SQUARE_ALREADY_SHOT,s , null);
+        if(square.isHit())
+        {
+            firePropertyChange(DefaultController.PLAYER1_SQUARE_ALREADY_SHOT, s, null);
         }
         
         /* Occupied Square */
         
         else if (square instanceof ShipSquare) {
-            square.hit();
-
+             square.hit();
+            
             /* Get reference to the Ship in this Square */
             
             ship = ((ShipSquare) square).getShip();
@@ -160,7 +158,13 @@ public final class DefaultModel extends AbstractModel {
             
             if (ship.isSunk()) { // If sunk, decrement fleet count and fire a Sink property change
                 player1.decrementCount();
+                if(player1.getCount() == 0)
+                {
+                     firePropertyChange(DefaultController.PLAYER1_GAME_OVER, s, ship.getName());
+                }
+                else{
                 firePropertyChange(DefaultController.PLAYER1_SHIP_SUNK, s, ship.getName());
+                }
             }
             else { // If not sunk, fire a Hit property change
                 firePropertyChange(DefaultController.PLAYER1_SHIP_HIT, s, ship.getName());
@@ -171,8 +175,7 @@ public final class DefaultModel extends AbstractModel {
         /* Empty Square */
         
         else { // Fire a Miss property change
-        square.hit();
-           
+             square.hit();
             firePropertyChange(DefaultController.PLAYER2_SHOT_MISSED, s, null);
         }
         
@@ -196,15 +199,9 @@ public final class DefaultModel extends AbstractModel {
         /* Get Square; Mark as Hit */
         
         Square square = player2.getPrimary().get(x, y);
-        
         if(square.isHit()){
-            
             firePropertyChange(DefaultController.PLAYER2_SQUARE_ALREADY_SHOT,s , null);
         }
-        
-        
-        
-        
         
         /* Occupied Square */
         
@@ -219,7 +216,17 @@ public final class DefaultModel extends AbstractModel {
             
             if (ship.isSunk()) { // If sunk, decrement fleet count and fire a Sink property change
                 player2.decrementCount();
-                firePropertyChange(DefaultController.PLAYER2_SHIP_SUNK, s, ship.getName());
+                
+                 if(player2.getCount() == 0)
+                 {
+                     firePropertyChange(DefaultController.PLAYER2_GAME_OVER, s, ship.getName());
+                 }
+                 else {
+                    firePropertyChange(DefaultController.PLAYER2_SHIP_SUNK, s, ship.getName());
+                 }
+                
+                     
+                
             }
             else { // If not sunk, fire a Hit property change
                 firePropertyChange(DefaultController.PLAYER2_SHIP_HIT, s, ship.getName());
@@ -228,7 +235,6 @@ public final class DefaultModel extends AbstractModel {
         
         else { // Fire a Miss property change
             square.hit();
-            
             firePropertyChange(DefaultController.PLAYER1_SHOT_MISSED, s, null);
         }
         

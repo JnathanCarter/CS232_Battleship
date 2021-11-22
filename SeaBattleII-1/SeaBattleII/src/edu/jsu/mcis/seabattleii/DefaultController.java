@@ -25,6 +25,9 @@ public class DefaultController extends AbstractController
     public static final String PLAYER2_SHIP_SUNK = "Player2ShipSunk";
     public static final String PLAYER2_SHOT_MISSED = "Player2ShotMissed";
     
+    public static final String PLAYER1_GAME_OVER = "Player1GameOver";
+    public static final String PLAYER2_GAME_OVER = "Player2GameOver";
+    
     public static final String PLAYER1_SQUARE_ALREADY_SHOT = "Player1SquareAlreadyShot";
     public static final String PLAYER2_SQUARE_ALREADY_SHOT = "Player2SquareAlreadyShot";
     /* 

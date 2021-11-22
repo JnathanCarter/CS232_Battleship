@@ -338,31 +338,32 @@ public class ViewMainWindow extends JFrame implements AbstractView {
             showCard((currentPlayer == 1 ? PLAYER_1 : PLAYER_2));
             
         }
-    
-        //Repeated shot
-        else if ( (e.getPropertyName().equals(DefaultController.PLAYER1_SQUARE_ALREADY_SHOT) && currentPlayer == 1) ||
-                      (e.getPropertyName().equals(DefaultController.PLAYER2_SQUARE_ALREADY_SHOT) && currentPlayer == 2) ) {
-                
-                /* Play Sound (if sounds enabled) */
-                
-                if (soundEnabled)
-                    splash.play();
-                
+
+        else if ( (e.getPropertyName().equals(DefaultController.PLAYER1_SQUARE_ALREADY_SHOT) && currentPlayer == 2) ||
+        (e.getPropertyName().equals(DefaultController.PLAYER2_SQUARE_ALREADY_SHOT) && currentPlayer == 1) ) {
+
+                /* Play Sound (if sounds enabled) 
+
                 /* Present Dialog Message */
-                
-                JOptionPane.showMessageDialog(this, "You have already shot to that square!!");
-                
-                /* Switch to empty card; prompt player to begin next turn */
-                
                 showCard(EMPTY_CARD);
-                JOptionPane.showMessageDialog(this, "Player " + otherPlayer() + ": Click \"OK\" to begin your turn ...");
+                JOptionPane.showMessageDialog(this, "You have already shot to that square!!");
+
+
+                currentPlayer = currentPlayer;
+                showCard((currentPlayer == 1 ? PLAYER_1 : PLAYER_2));}
+
+        else if ( (e.getPropertyName().equals(DefaultController.PLAYER2_GAME_OVER) && currentPlayer == 1) ||
+                  (e.getPropertyName().equals (DefaultController.PLAYER1_GAME_OVER) && currentPlayer == 2)) {
+         
+                    if (soundEnabled)
+                    boom.play();
+                    
+                    showCard(EMPTY_CARD);
+                    JOptionPane.showMessageDialog(this, "The game has ended Player" + currentPlayer+ " has won!");}
+                                       
+                    
                 
-                /* Switch to next player; show corresponding Card */
-                
-                currentPlayer = otherPlayer();
-                showCard((currentPlayer == 1 ? PLAYER_1 : PLAYER_2));
-                
-            }
-        
-    }
+         
+         }
+    
 }
